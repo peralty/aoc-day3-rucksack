@@ -2,10 +2,7 @@ import java.io.File
 
 fun main() {
     val rucksacks = createRucksackListFromInput()
-    var sumOfAllPriorityValues = 0
-    rucksacks.forEach { rucksack ->
-        sumOfAllPriorityValues += getValueOfDuplicate(rucksack.identifyDuplicate())
-    }
+    val sumOfAllPriorityValues = rucksacks.sumOf { getValueOfDuplicate(it.identifyDuplicate()) }
     println("Summe aller Prioriäten: $sumOfAllPriorityValues")
 }
 
