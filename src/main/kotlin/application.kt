@@ -11,26 +11,15 @@ fun main() {
 
 fun createRucksackListFromInput(): List<Rucksack> {
     val file = File("src/main/resources/rucksack-items.txt")
-    val allRucksacks = mutableListOf<Rucksack>()
     var rucksackNameCounter = 0
 
-    file.forEachLine { line ->
-        var firstCompartmentItems = mutableListOf<Char>()
-        var secondCompartmentItems = mutableListOf<Char>()
+    return file.readLines().map { line ->
         val halfLength = line.length / 2
-        val firstHalf = line.substring(0, halfLength)
-        val secondHalf = line.substring(halfLength)
-        firstHalf.forEach { character ->
-            firstCompartmentItems.add(character)
-        }
-        secondHalf.forEach { character ->
-            secondCompartmentItems.add(character)
-        }
+        val firstHalf = line.substring(0, halfLength).toMutableList()
+        val secondHalf = line.substring(halfLength).toMutableList()
         rucksackNameCounter++
-        allRucksacks.add(Rucksack("Rucksack $rucksackNameCounter", firstCompartmentItems, secondCompartmentItems))
+        Rucksack("Rucksack $rucksackNameCounter", firstHalf, secondHalf)
     }
-
-    return allRucksacks
 }
 
 fun getValueOfDuplicate(character: Char?): Int {
